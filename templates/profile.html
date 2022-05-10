@@ -1,0 +1,76 @@
+<html>
+  <body>
+    {% include "head.html" %}
+    <section class="testimonial" id="testimonial">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 py-5 bg-success text-white text-center">
+            <div class=" ">
+              <div class="card-body">
+                <img
+                  src="https://freesvg.org/img/1538299575.png"
+                  style="width: 30%"
+                />
+                <h2 class="py-3">ลงทะเบียนสำเร็จ</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 py-5 border">
+            <h4 class="pb-4">กรุณากรอกรายละเอียดเพื่อยืนยันการเข้าพื้นที่</h4>
+            <div class="container">
+              <div class="row">
+                <div class="col">ชื่อ : <a class="text-muted">{{name}}</a></div>
+              </div>
+              <div class="row">
+                <div class="col">ฝ่ายที่ติดต่อ :  <a class="text-muted">{{department}}</a></div>
+              </div>
+              <div class="row">
+                <div class="col">เบอร์ : <a class="text-muted">{{phonenumber}}</a></div>
+              </div>
+              <div class="row">
+                <div class="col">วัน :  <a class="text-muted">{{date}}</a></div>
+                <div class="col">เวลาเข้า :  <a class="text-muted">{{timein}}</a></div>
+              </div>
+              <div class="row">
+                <div class="col">รายละเอียด :  <a class="text-muted">{{detail}}</a></div>
+              </div>
+            </div>
+            <br>
+            <form action="{{ url_for('saveemployee') }}">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <a class="text-danger">* โปรดใส่รหัสพนักงาน </a>
+                  <input
+                    id="employeeid"
+                    name="employeeid"
+                    placeholder="รหัสพนักงาน"
+                    class="form-control"
+                    required="required"
+                    type="text"
+                  />
+                  <input type="hidden" name="ip" value="{{ip}}" />
+                  <input type="hidden" name="name" value="{{name}}" />
+                  <input type="hidden" name="department" value="{{department}}" />
+                  <input type="hidden" name="phonenumber" value="{{phonenumber}}" />
+                  <input type="hidden" name="date" value="{{date}}" />
+                  <input type="hidden" name="timein" value="{{timein}}" />
+                  <input type="hidden" name="detail" value="{{detail}}" />
+                </div>
+                <div class="form-group col-md-6"></div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col text-center">
+                    <button type="submit" class="btn btn-primary">
+                      ยืนยัน
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>Welcome</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+      $.getJSON("https://api.ipify.org?format=json", function (data) {
+        $("#ip").html(data.ip);
+        document.getElementById("ip").value = data.ip;
+      });
+    </script>
+  </head>
+  <body class="bg-success">
+    <center>
+      {% include "head.html" %}
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <section class="testimonial" id="testimonial">
+        <div class="container">
+          <div class="row justify-content-center">
+            <a
+              ><img
+                src="https://pngimg.com/uploads/welcome/welcome_PNG34.png"
+                style="width: 30%"
+            /></a>
+            <div class="col-md-4 py-5 text-white text-center">
+              <p
+              ><img
+                src="https://www.thaiopticalgroup.com/images/logo_tog.png"
+                style="width: 30%"
+            /></p>
+              <div class="">
+                <form action="{{ url_for('login') }}">
+                  <button type="submit" class="btn btn-primary">
+                    ลงทะเบียน
+                  </button>
+                  <input type="hidden" name="ip" id="ip" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </center>
+  </body>
+</html>

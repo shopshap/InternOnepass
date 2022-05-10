@@ -1,0 +1,61 @@
+<html>
+  <body>
+    {% include "head.html" %}
+    <section class="testimonial" id="testimonial">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 py-5 bg-success text-white text-center">
+            <div class=" ">
+              <div class="card-body">
+                <img
+                  src="https://pngimg.com/uploads/exit/exit_PNG44.png"
+                  style="width: 30%"
+                />
+                <h2 class="py-5">ข้อมูลการเข้าพื้นที่</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 py-5 border">
+            <h4 class="pb-4">ตรวจสอบข้อมูลเพื่อยืนยันการออกพื้นที่</h4>
+            <div class="container">
+              <div class="row">
+                <div class="col">ชื่อ : <a class="text-muted">{{name}}</a></div>
+              </div>
+              <div class="row">
+                <div class="col">ฝ่ายที่ติดต่อ :  <a class="text-muted">{{department}}</a></div>
+              </div>
+              <div class="row">
+                <div class="col">เบอร์ : <a class="text-muted">{{phonenumber}}</a></div>
+              </div>
+              <div class="row">
+                <div class="col">วัน :  <a class="text-muted">{{date}}</a></div>
+                <div class="col">เวลาเข้า :  <a class="text-muted">{{timein}}</a></div>
+              </div>
+              <div class="row">
+                <div class="col">รายละเอียด :  <a class="text-muted">{{detail}}</a></div>
+              </div>
+              <div class="row">
+                <div class="col">รหัสพนักงาน :  <a class="text-muted">{{employeeid}}</a></div>
+              </div>
+            </div>
+            <br>
+            <form action="{{ url_for('logout') }}">
+              <div class="container">
+                <div class="row">
+                  <div class="col text-center">
+                    <input type="hidden" name="ip" value="{{ip}}" />
+                    <input type="hidden" name="name" value="{{name}}" />
+                    <input type="hidden" name="date" value="{{date}}" />
+                    <button type="submit" class="btn btn-danger">
+                      ออกจากพื้นที่
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<html>
+  <body>
+   {% include "head.html" %}
+    <section class="testimonial" id="testimonial">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 py-5 bg-primary text-white text-center">
+            <div class=" ">
+              <div class="card-body">
+                <img
+                  src="http://www.ansonika.com/mavia/img/registration_bg.svg"
+                  style="width: 30%"
+                />
+                <h2 class="py-3">ลงทะเบียน</h2>
+                <p>กรุณากรอกรายละเอียดสิ่งที่ระบบต้องการเพื่อดำเนินการต่อ</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 py-5 border">
+            <h4 class="pb-4">กรุณากรอกรายละเอียด</h4>
+            <form action="{{ url_for('saveVisitor') }}" class="login-form">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <input
+                    id="name"
+                    name="name"
+                    placeholder="ชื่อ-นามสกุล"
+                    class="form-control"
+                    required="required"
+                    type="text"
+                  />
+                </div>
+                <div class="form-group col-md-6"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <input
+                    id="phonenumber"
+                    name="phonenumber"
+                    placeholder="หมายเลขโทรศัพท์"
+                    class="form-control"
+                    required="required"
+                    type="text"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <select id="inputState" class="form-control" name="department" required>
+                    <option selected>ฝ่ายที่ต้องการพบ</option>
+                    <option value="New Buyer">New Buyer</option>
+                    <option value="Auction">Auction</option>
+                    <option value="Complaint">Complaint</option>
+                    <option value="Feedback">Feedback</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-12">
+                  <textarea
+                    id="detail"
+                    name="detail"
+                    cols="40"
+                    rows="5"
+                    class="form-control"
+                    required="required"
+                    placeholder="มาทำอะไร"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="invalidCheck2"
+                        required
+                      />
+                      <label class="form-check-label" for="invalidCheck2">
+                        <small
+                          >หลังจากกดยืนยัน, คุณยอมรับข้อกำหนด & เงื่อนไข
+                          ข้อตกลงสำหรับผู้เยี่ยมชมและความเป็นส่วนตัว</small
+                        >
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" name = "ip" value="{{ ip }}"/> 
+              <input type="hidden" name = "date" value="{{ date }}"/> 
+              <input type="hidden" name = "time" value="{{ time }}"/> 
+              <div class="form-row">
+                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
