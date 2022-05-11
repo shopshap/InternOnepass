@@ -1,48 +1,17 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex,nofollow">
-    <title>Dashboard</title>
-    <link rel="canonical" href="https://www.wrappixel.com/templates/xtreme-admin-lite/" />
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../static/assets/images/favicon.png">
-    <!-- Custom CSS -->
-    <link href="../static/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="../static/dist/css/style.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!-- Date time Pick -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-    <!-- Sidebar -->
-    <link href="../static/dist/css/sidebar.scss">
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style type="text/css">
-    .material-icons.md-48 { font-size: 48px; }
-    </style>
-
     <!-- Area Chart -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+      function drawChartArea() {
         var data = google.visualization.arrayToDataTable([
-        ['Container', 'Van01','Van02','Van03','Van04','Van05','Van06','Van07','Bus01','Bus02','Bus03'],
+        ['Department', 'marketing','sales','hr','customerservice','accounting'],
           {% for res in res %}
-          ['{{res['Date']}}', {{res['Van01']}}, {{res['Van02']}}, {{res['Van03']}}, {{res['Van04']}}, {{res['Van05']}}, {{res['Van06']}}, {{res['Van07']}}, {{res['Bus01']}}, {{res['Bus02']}}, {{res['Bus03']}}],
+          ['{{res['Date']}}', {{res['marketing']}}, {{res['sales']}}, {{res['hr']}}, {{res['customerservice']}}, {{res['accounting']}}],
           {% endfor %}
         ]);
 
@@ -57,12 +26,12 @@
       }
 
       $(window).resize(function(){
-        drawChart();
+        drawChartArea();
       });
     </script>
 </head>
-
 <body>
+    {% include "headdashboard.html" %}
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
             <div class="navbar-header" data-logobg="skin5">
@@ -93,7 +62,7 @@
                                 <!-- User Profile-->
                                 
                                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                        href="/" aria-expanded="false"><i class="material-icons md-48">dashboard</i><span
+                                        href="/dashboard" aria-expanded="false"><i class="material-icons md-48">dashboard</i><span
                                             class="hide-menu">Dashboard</span></a></li>
                                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                         href="/table" aria-expanded="false"><i class="fa fa-table"></i><span
@@ -183,7 +152,7 @@
                                                 <!-- ============================================================== -->
                                                 <input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
                                                 <br></br>
-                                                <form action="/action_page.php">
+                                                <form action="{{ url_for('dashboardsearch') }}">
                                                     <div class="d-md-flex">
                                                         <input type="date" id="startdaterange" name="startdaterange" value="01/01/2018 - 01/15/2018" />
                                                         &nbsp;&nbsp;<h5>To</h5>&nbsp;&nbsp;
@@ -202,10 +171,14 @@
                                 <table class="table v-middle" id="datatable">
                                     <thead>
                                         <tr class="bg-light">
-                                            <th class="border-top-0">Username</th>
-                                            <th class="border-top-0">Container</th>
+                                            <th class="border-top-0">Name</th>
+                                            <th class="border-top-0">Detail</th>
+                                            <th class="border-top-0">Phone</th>
+                                            <th class="border-top-0">Employee</th>
+                                            <th class="border-top-0">Department</th>
                                             <th class="border-top-0">Date</th>
-                                            <th class="border-top-0">Time</th>
+                                            <th class="border-top-0">Time in</th>
+                                            <th class="border-top-0">Time out</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -217,14 +190,20 @@
                                                             class="btn btn-circle d-flex btn-info text-white">US</a>
                                                     </div>
                                                     <div class="">
-                                                        <h4 class="m-b-0 font-16">{{ user['Username'] }}</h4>
+                                                        <h4 class="m-b-0 font-16">{{ user['name'] }}</h4>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>{{ user['Container'] }}</td>
-                                            <td>{{ user['Date'] }}</td>
+                                            <td>{{ user['detail'] }}</td>
+                                            <td>{{ user['phonenumber'] }}</td>
+                                            <td>{{ user['employeeid'] }}</td>
+                                            <td>{{ user['department'] }}</td>
+                                            <td>{{ user['date'] }}</td>
                                             <td>
-                                                <label class="label label-success">{{ user['Time'] }}</label>
+                                                <label class="label label-success">{{ user['timein'] }}</label>
+                                            </td>
+                                            <td>
+                                                <label class="label label-danger">{{ user['timeout'] }}</label>
                                             </td>
                                         </tr>
                                         {% endfor %}

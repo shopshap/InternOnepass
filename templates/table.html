@@ -1,40 +1,7 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noindex,nofollow">
-        <title>Dashboard</title>
-        <link rel="canonical" href="https://www.wrappixel.com/templates/xtreme-admin-lite/" />
-        <!-- Favicon icon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="../static/assets/images/favicon.png">
-        <!-- Custom CSS -->
-        <link href="../static/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-        <!-- Custom CSS -->
-        <link href="../static/dist/css/style.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!-- Date time Pick -->
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-        <!-- Dropdown -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <style type="text/css">
-        .material-icons.md-48 { font-size: 48px; }
-        
-        </style>
-    </head>
-
 <body>
+    {% include "headdashboard.html" %}
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
             <div class="navbar-header" data-logobg="skin5">
@@ -59,7 +26,7 @@
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="/" aria-expanded="false"><i class="material-icons md-48">dashboard</i><span
+                            href="/dashboard" aria-expanded="false"><i class="material-icons md-48">dashboard</i><span
                                 class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                             href="/table" aria-expanded="false"><i class="fa fa-table"></i><span
@@ -148,18 +115,13 @@
                                 <div style="display: flex; justify-content: flex-end">
                                     <!-- Dropdown Van -->
                                     <select id="Searchcontainer" onclick="seachcontainer()">
-                                        <option value="" selected>Container</option>
+                                        <option value="" selected>Department</option>
                                         <option value="">All</option>
-                                        <option value="Van01" >Van01</option>
-                                        <option value="Van02">Van02</option>
-                                        <option value="Van03">Van03</option>
-                                        <option value="Van04">Van04</option>
-                                        <option value="Van05">Van05</option>
-                                        <option value="Van06">Van06</option>
-                                        <option value="Van07">Van07</option>
-                                        <option value="Bus01">Bus01</option>
-                                        <option value="Bus02">Bus02</option>
-                                        <option value="Bus03">Bus03</option>
+                                        <option value="ฝ่ายลูกค้าสัมพันธ์">ฝ่ายลูกค้าสัมพันธ์</option>
+                                        <option value="ฝ่ายการตลาด">ฝ่ายการตลาด</option>
+                                        <option value="ฝ่ายขาย">ฝ่ายขาย</option>
+                                        <option value="ฝ่ายบัญชี/การเงิน">ฝ่ายบัญชี/การเงิน</option>
+                                        <option value="ฝ่ายบุคคล">ฝ่ายบุคคล</option>
                                     </select>&nbsp;&nbsp;
                                     <select id="dynamic_select">
                                         <option value="/chart_DWMY?type=All" selected>Date</option>
@@ -285,7 +247,7 @@
           table = document.getElementById("datatable");
           tr = table.getElementsByTagName("tr");
           for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
+            td = tr[i].getElementsByTagName("td")[4];
             if (td) {
               txtValue = td.textContent || td.innerText;
               if (txtValue.toUpperCase().indexOf(filter) > -1) {
