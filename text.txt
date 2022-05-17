@@ -1,0 +1,90 @@
+ExternalVisitorDetail = ข้อมูลการเข้ามาในพื้นที่แบบระเอียด
+ExternalVisitors = รหัสของผู้ที่มาหา
+ExternalVisitorTran = ข้อมูลของใครมาพบใคร เวลาไหน
+ExternalVisitorVaccineType = รหัสชนิดวัคซีน
+ExternalVisitPurpose = รหัสย่อของชนิดการเข้ามาธุระ
+
+
+
+
+SELECT TOP(100) * FROM ExternalVisitorDetail s
+RIGHT JOIN
+(SELECT CAST(WorkTimeIn AS TIME(0)) AS TimeIn, CAST(WorkTimeOut AS TIME(0)) AS TimeOut 
+, CAST(WorkTimeIn AS DATE) AS DateIn , WorkID AS WorkID
+FROM ExternalVisitorDetail) TI
+ON (s.WorkID = TI.WorkID)
+RIGHT JOIN
+(SELECT * FROM ExternalVisitPurpose) pr
+ON (s.VisitPurpose = pr.VisitID)
+WHERE GuestCompany IS NOT NULL and 
+    s.WorkID IS NOT NULL and GuestName IS NOT NULL and 
+    VisitPurpose IS NOT NULL and WorkLocation IS NOT NULL 
+    and WorkTimeIn IS NOT NULL and WorkTimeOut IS NOT NULL
+    and CustID IS NOT NULL and BarcodeExpireDate IS NOT NULL
+	ORDER BY WorkTimeIn DESC
+
+
+
+
+
+SELECT ExternalVisitorDetail.WorkID, ExternalVisitorDetail.GuestName, ExternalVisitorDetail.GuestCompany, 
+ExternalVisitorDetail.Phone, ExternalVisitorDetail.VisitPurpose, ExternalVisitorDetail.WorkLocation, 
+ExternalVisitorDetail.CustID, ExternalVisitorDetail.WorkTimeIn, ExternalVisitorDetail.WorkTimeOut , ExternalVisitPurpose.VisitDesc_TH
+FROM ExternalVisitorDetail
+LEFT JOIN ExternalVisitPurpose
+ON ExternalVisitorDetail.VisitPurpose = ExternalVisitPurpose.VisitID 
+where
+LEN(ExternalVisitorDetail.WorkID)  = 11and
+ExternalVisitorDetail.Guestname IS NOT NULL and ExternalVisitorDetail.Guestname != '' and
+ExternalVisitorDetail.GuestCompany IS NOT NULL and ExternalVisitorDetail.GuestCompany != '' and
+ExternalVisitorDetail.VisitPurpose IS NOT NULL and ExternalVisitorDetail.VisitPurpose != '' 
+
+
+
+SELECT TOP (10) s.WorkID, s.GuestName, s.GuestCompany, s.Phone, s.VisitPurpose, s.WorkLocation, s.CustID, s.WorkTimeIn, WorkTimeOut
+    FROM ExternalVisitorDetail as s ,ExternalVisitorTran as t where 
+    s.WorkID = t.WorkID and
+    s.Guestname IS NOT NULL and s.Guestname != '' and
+    s.GuestCompany IS NOT NULL and s.GuestCompany != '' and
+    s.VisitPurpose IS NOT NULL and s.VisitPurpose != ''
+
+
+
+
+select TOP(100) CAST(WorkTimeIn AS DATE) AS DateIn, O1, O2, O3, O4, O5, O6, O7, P1, P2, P3, P4, P5, P6, P7, P8, P9
+from ExternalVisitorDetail ex
+pivot
+(
+  COUNT(FlagStation)
+  for VisitPurpose in (O1, O2, O3, O4, O5, O6, O7, P1, P2, P3, P4, P5, P6, P7, P8, P9)
+) piv
+WHERE GuestCompany IS NOT NULL and 
+            WorkID IS NOT NULL and GuestName IS NOT NULL
+			and WorkLocation IS NOT NULL 
+            and WorkTimeIn IS NOT NULL and WorkTimeOut IS NOT NULL
+            and CustID IS NOT NULL and BarcodeExpireDate IS NOT NULL
+	        ORDER BY WorkTimeIn DESC
+
+
+
+
+
+
+
+----------------------------------------------------------------
+select * from
+            (
+            select (CAST(WorkTimeIn AS DATE)) AS DateIn, value from ExternalVisitorDetail
+            unpivot
+            (
+                value
+                for col in (VisitPurpose)
+            ) unp
+            ) src
+            pivot
+            (
+            count(value)
+            for value in (O1, O2, O3, O4, O5, O6, O7, P1, P2, P3, P4, P5, P6, P7, P8, P9)
+            ) piv
+            GROUP BY DateIn, piv.O1, piv.O2, piv.O3, piv.O4, piv.O5, piv.O6, piv.O7, piv.P1, piv.P2, piv.P3, piv.P4, piv.P5, piv.P6, piv.P7, piv.P8, piv.P9
+            Order by DateIn DESC

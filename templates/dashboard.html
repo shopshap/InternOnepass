@@ -7,16 +7,16 @@
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
-      function drawChartArea() {
+      function drawChart() {
         var data = google.visualization.arrayToDataTable([
-        ['Department', 'marketing','sales','hr','customerservice','accounting'],
-          {% for res in res %}
-          ['{{res['Date']}}', {{res['marketing']}}, {{res['sales']}}, {{res['hr']}}, {{res['customerservice']}}, {{res['accounting']}}],
-          {% endfor %}
-        ]);
+        ['Visitdetail', 'ซัพพลายเออร์ส่งมอบ พัสดุที่ได้สั่งซื้อ','ผู้ให้บริการ ปฏิบัติหน้าที่ ที่ได้รับการว่าจ้าง','ส่งเอกสาร วางบิล แจ้งหนี้','สมัครงาน สัมภาษณ์งาน','มารับสินค้า รับเอกสาร','รับขยะสด/ของเสีย เพื่อนำไปกำจัด','อื่นๆ','1วัน ก่อสร้าง ซ่อมบำรุง ติดตั้ง ตรวจสอบ/ประชุมธุรกิจ ','ซื้อ  เศษซากที่ได้รับอนุมัติ/ก่อสร้าง ซ่อมแซม ติดตั้ง ','ผู้ประกอบการร้านค้าโรงอาหาร/ซ่อมบำรุง','ซัพพลายเออร์ ผู้ให้บริการ ประชุมธุรกิจ/ฝึกอบรม','อาคันตุกะเยี่ยมบริษัท ลูกค้า ประชุมธุรกิจ/ตรวจสอบโดยบุคคลภายนอก','เจ้าหน้าที่รัฐ/คบขับรถรับส่งพนักงาน','อื่นๆ/ผู้ประกอบการร้านค้าโรงอาหาร','ซื้อ  เศษซากที่ได้รับอนุมัติ','รับขยะสด/ของเสียเพื่อนำไปกำจัด'],
+        {% for res in res %}
+        ['{{res[0]}}',{{res[1]}}, {{res[2]}},{{res[3]}}, {{res[4]}}, {{res[5]}}, {{res[6]}}, {{res[7]}}, {{res[8]}}, {{res[9]}}, {{res[10]}},{{res[11]}},{{res[12]}},{{res[13]}},{{res[14]}},{{res[15]}},{{res[16]}}],
+        {% endfor %}
+     ]);
 
         var options = {
-          title: 'Company Container',
+          title: 'Type Visitors',
           hAxis: {title: 'Year-Month-Day',  titleTextStyle: {color: '#333'}},
           vAxis: {minValue: 0}
         };
@@ -26,7 +26,7 @@
       }
 
       $(window).resize(function(){
-        drawChartArea();
+        drawChart();
       });
     </script>
 </head>
@@ -150,9 +150,13 @@
                                                 <!-- ============================================================== -->
                                                 <!-- Search -->
                                                 <!-- ============================================================== -->
-                                                <input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                                                <div style="display: flex; justify-content: flex-end">
+                                                    <h1>Total Visitors : {{total}}</h1>
+                                                    <br></br>
+                                                </div>
+                                                <input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" >
                                                 <br></br>
-                                                <form action="{{ url_for('dashboardsearch') }}">
+                                                <form action="/">
                                                     <div class="d-md-flex">
                                                         <input type="date" id="startdaterange" name="startdaterange" value="01/01/2018 - 01/15/2018" />
                                                         &nbsp;&nbsp;<h5>To</h5>&nbsp;&nbsp;
@@ -166,6 +170,7 @@
                                     </div>
                                 </div>
                                 <!-- title -->
+                                
                             </div>
                             <div class="table-responsive">
                                 <table class="table v-middle" id="datatable">
@@ -173,7 +178,7 @@
                                         <tr class="bg-light">
                                             <th class="border-top-0">Name</th>
                                             <th class="border-top-0">Detail</th>
-                                            <th class="border-top-0">Phone</th>
+                                            <th class="border-top-0">GuestCompany</th>
                                             <th class="border-top-0">Employee</th>
                                             <th class="border-top-0">Department</th>
                                             <th class="border-top-0">Date</th>
@@ -186,24 +191,21 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="m-r-5"><a
-                                                            class="btn btn-circle d-flex btn-info text-white">US</a>
-                                                    </div>
                                                     <div class="">
-                                                        <h4 class="m-b-0 font-16">{{ user['name'] }}</h4>
+                                                        <h4 class="m-b-0 font-14">{{ user[1] }}</h4>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>{{ user['detail'] }}</td>
-                                            <td>{{ user['phonenumber'] }}</td>
-                                            <td>{{ user['employeeid'] }}</td>
-                                            <td>{{ user['department'] }}</td>
-                                            <td>{{ user['date'] }}</td>
+                                            <td>{{ user[22] }}</td>
+                                            <td>{{ user[2] }}</td>
+                                            <td>{{ user[8] }}</td>
+                                            <td>{{ user[5] }}</td>
+                                            <td>{{ user[18] }}</td>
                                             <td>
-                                                <label class="label label-success">{{ user['timein'] }}</label>
+                                                <label class="label label-success">{{ user[16] }}</label>
                                             </td>
                                             <td>
-                                                <label class="label label-danger">{{ user['timeout'] }}</label>
+                                                <label class="label label-danger">{{ user[17] }}</label>
                                             </td>
                                         </tr>
                                         {% endfor %}

@@ -85,8 +85,9 @@
                             <div class="card-body">
                                 <!-- title -->
                                 <div class="d-md-flex">
-                                    <div>
-                                        <h4 class="card-title">Search</h4>
+                                    <div >
+                                        <h4 class="card-title" style=" display: table-cell; height: 100px;vertical-align: middle;">
+                                        Search</h4>
                                     </div>
                                     <div class="card-body">
                                         <!-- title -->
@@ -94,7 +95,7 @@
                                             <!-- Search -->
                                             <!-- ============================================================== -->
                                             
-                                            <input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search Employee Code..." title="Type in a name">
+                                            <input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search Name" title="Type in a name">
                                             <br></br>
                                             <form action="{{ url_for('tablesearch') }}">
                                                 <div class="d-md-flex">
@@ -117,11 +118,9 @@
                                     <select id="Searchcontainer" onclick="seachcontainer()">
                                         <option value="" selected>Department</option>
                                         <option value="">All</option>
-                                        <option value="ฝ่ายลูกค้าสัมพันธ์">ฝ่ายลูกค้าสัมพันธ์</option>
-                                        <option value="ฝ่ายการตลาด">ฝ่ายการตลาด</option>
-                                        <option value="ฝ่ายขาย">ฝ่ายขาย</option>
-                                        <option value="ฝ่ายบัญชี/การเงิน">ฝ่ายบัญชี/การเงิน</option>
-                                        <option value="ฝ่ายบุคคล">ฝ่ายบุคคล</option>
+                                        <option value="TOG">TOG</option>
+                                        <option value="TOC">TOC</option>
+                                        <option value="PLS">PLS</option>
                                     </select>&nbsp;&nbsp;
                                     <select id="dynamic_select">
                                         <option value="/chart_DWMY?type=All" selected>Date</option>
@@ -140,7 +139,7 @@
                                         <tr class="bg-light">
                                             <th class="border-top-0">Name</th>
                                             <th class="border-top-0">Detail</th>
-                                            <th class="border-top-0">Phone</th>
+                                            <th class="border-top-0">GuestCompany</th>
                                             <th class="border-top-0">Employee</th>
                                             <th class="border-top-0">Department</th>
                                             <th class="border-top-0">Date</th>
@@ -153,24 +152,21 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="m-r-5"><a
-                                                            class="btn btn-circle d-flex btn-info text-white">US</a>
-                                                    </div>
                                                     <div class="">
-                                                        <h4 class="m-b-0 font-16">{{ user['name'] }}</h4>
+                                                        <h4 class="m-b-0 font-14">{{ user[1] }}</h4>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>{{ user['detail'] }}</td>
-                                            <td>{{ user['phonenumber'] }}</td>
-                                            <td>{{ user['employeeid'] }}</td>
-                                            <td>{{ user['department'] }}</td>
-                                            <td>{{ user['date'] }}</td>
+                                            <td>{{ user[22] }}</td>
+                                            <td>{{ user[2] }}</td>
+                                            <td>{{ user[8] }}</td>
+                                            <td>{{ user[5] }}</td>
+                                            <td>{{ user[18] }}</td>
                                             <td>
-                                                <label class="label label-success">{{ user['timein'] }}</label>
+                                                <label class="label label-success">{{ user[16] }}</label>
                                             </td>
                                             <td>
-                                                <label class="label label-danger">{{ user['timeout'] }}</label>
+                                                <label class="label label-danger">{{ user[17] }}</label>
                                             </td>
                                         </tr>
                                         {% endfor %}

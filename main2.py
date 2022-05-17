@@ -55,7 +55,7 @@ def login():
                     print("อยู่ในเวลารายการ")
                     count = 0
                     connection = getConnection()
-                    sql = "SELECT * FROM visitor WHERE ip = '%s' AND employeeid ='' AND date = '%s'" %(ip,date)
+                    sql = "SELECT * FROM visitor WHERE ip = '%s' AND employeeid ='' AND date = '%s'" %(ip,date) ##
                     cursor = connection.cursor()
                     cursor.execute(sql)
                     vi = cursor.fetchall()

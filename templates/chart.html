@@ -10,9 +10,9 @@
 
       function drawChart() {
         var data = new google.visualization.arrayToDataTable([
-        ['Container', 'Van01','Van02','Van03','Van04','Van05','Van06','Van07','Bus01','Bus02','Bus03'],
+        ['Visitdetail', 'ซัพพลายเออร์ส่งมอบ พัสดุที่ได้สั่งซื้อ','ผู้ให้บริการ ปฏิบัติหน้าที่ ที่ได้รับการว่าจ้าง','ส่งเอกสาร วางบิล แจ้งหนี้','สมัครงาน สัมภาษณ์งาน','มารับสินค้า รับเอกสาร','รับขยะสด/ของเสีย เพื่อนำไปกำจัด','อื่นๆ','1วัน ก่อสร้าง ซ่อมบำรุง ติดตั้ง ตรวจสอบ/ประชุมธุรกิจ ','ซื้อ  เศษซากที่ได้รับอนุมัติ/ก่อสร้าง ซ่อมแซม ติดตั้ง ','ผู้ประกอบการร้านค้าโรงอาหาร/ซ่อมบำรุง','ซัพพลายเออร์ ผู้ให้บริการ ประชุมธุรกิจ/ฝึกอบรม','อาคันตุกะเยี่ยมบริษัท ลูกค้า ประชุมธุรกิจ/ตรวจสอบโดยบุคคลภายนอก','เจ้าหน้าที่รัฐ/คบขับรถรับส่งพนักงาน','อื่นๆ/ผู้ประกอบการร้านค้าโรงอาหาร','ซื้อ  เศษซากที่ได้รับอนุมัติ','รับขยะสด/ของเสียเพื่อนำไปกำจัด'],
         {% for res in res %}
-        ['{{res['Date']}}', {{res['Van01']}}, {{res['Van02']}}, {{res['Van03']}}, {{res['Van04']}}, {{res['Van05']}}, {{res['Van06']}}, {{res['Van07']}}, {{res['Bus01']}}, {{res['Bus02']}}, {{res['Bus03']}}],
+        ['{{res[0]}}',{{res[1]}}, {{res[2]}},{{res[3]}}, {{res[4]}}, {{res[5]}}, {{res[6]}}, {{res[7]}}, {{res[8]}}, {{res[9]}}, {{res[10]}},{{res[11]}},{{res[12]}},{{res[13]}},{{res[14]}},{{res[15]}},{{res[16]}}],
         {% endfor %}
      ]);
 
@@ -38,6 +38,10 @@
       });
       
     </script>
+
+    <!-- Combo Chart -->
+
+
     </head>
 <body>
     {% include "headdashboard.html" %}
@@ -155,11 +159,11 @@
                                     </div>
                                     
                                 </div>
-                                <div class="card">
-                                    <div class="card-body">
+                                <div class="card" >
+                                    <div class="card-body" >
                                         <div class="row">
                                             <!-- column -->
-                                            <div id="columnchart_material" class="chart-container"></div>
+                                            <div id="columnchart_material" class="chart-container" style="height: 600px;"></div>
                                             <!-- column -->
                                         </div>
                                     </div>
